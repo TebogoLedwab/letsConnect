@@ -1,0 +1,18 @@
+<div class="card__collection clear-fix  animated fadeInUp ">
+  <div class="cards cards--two hand" (click)="view_profile()">
+    <!-- When the avatar is there -->
+    <img *ngIf="profile.user.avatar != ''" [src]="imagePath" class="img-responsive" alt="Cards Image" />
+    <!-- When there is no avatar -->
+    <img *ngIf="profile.user.avatar == ''" [src]="avatarUrl" class="img-responsive" alt="Cards Image" />
+
+    <div class="points">
+      <mdb-icon fab icon="kickstarter-k"></mdb-icon> {{profile.points}}
+    </div>
+
+    <span class="cards--two__rect"></span>
+
+    <span class="cards--two__tri"></span>
+    <p >{{ profile.user.name }}</p>
+    <p >{{ profile.user.name }}</p>
+  </div>
+</div>

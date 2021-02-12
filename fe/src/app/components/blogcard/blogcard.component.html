@@ -1,0 +1,200 @@
+<div class="blog-card alt hoverable  wow fadeInUp slow" *ngIf="blog.image && blog.image != ''">
+  <div class="meta">
+    <div class="photo" [style.background-image]="sanitizeImage(blog.image)"></div>
+    <ul class="details">
+      <li class="fas fa-user"> {{blog.user.name}}</li>
+      <div></div>
+      <li class="far fa-calendar">{{blog.datePosted | date :"MMM"}}. {{blog.datePosted | date :"dd"}},
+        {{blog.datePosted | date :"yyyy"}}</li>
+
+    </ul>
+  </div>
+  <div class="description">
+
+    <div class="row">
+      <div class="col-sm-12">
+
+        <h1>
+          <span (click)="view_blog()">{{blog.title}}</span>
+
+          <div class="post-options">
+
+            <div class="float-right align-v-center">
+              <ul style="list-style: none;" class="float-right align-v-center">
+
+                <li class="nav-item avatar dropdown  float-right news-item" dropdown>
+                  <a dropdownToggle mdbWavesEffect type="button" class="nav-links" mdbWavesEffect
+                    *ngIf="currentUser && currentUser._id == blog.user._id">
+                    <i class="fas fa-ellipsis-h"></i>
+                  </a>
+                  <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+
+                    <a class="dropdown-item waves-light" mdbWavesEffect (click)="editBlogModal.show()"><i
+                        class="fas fa-pencil-alt"></i>
+                      Edit this post</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect (click)="deleteBlog()"> <i
+                        class="fas fa-ban"></i>
+                      Delete this post</a>
+                  </div>
+
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </h1>
+
+      </div>
+    </div>
+
+    <hr>
+
+    <p>{{blog.content}}</p>
+
+    <hr>
+    <button class="like" (click)="blogLiking()" [disabled]="hasDisliked()"><i class="far fa-thumbs-up" aria-hidden="true"> &nbsp;
+        {{blog.likes.length}}</i></button> &nbsp;
+    <button class="dislike" (click)="blogDisliking()" [disabled]="hasLiked()"><i class="far fa-thumbs-down" aria-hidden="true">
+        &nbsp;
+        {{blog.dislikes.length}}</i></button>
+
+  </div>
+</div>
+
+
+
+
+<div class="blog-card-2 alt hoverable wow fadeInUp slow" *ngIf="!blog.image || blog.image == ''">
+
+  <div class="description">
+
+    <div class="row">
+
+      <div class="col-md-12">
+        <h1>
+          <span (click)="view_blog()">{{blog.title}}</span>
+
+          <div class="post-options">
+
+            <div class="float-right align-v-center">
+              <ul style="list-style: none;" class="float-right align-v-center"
+                *ngIf="currentUser && currentUser._id == blog.user._id">
+                <li class="nav-item avatar dropdown  float-left news-item" dropdown>
+
+                  <a dropdownToggle mdbWavesEffect type="button" class="nav-links" mdbWavesEffect>
+                    <i class="fas fa-ellipsis-h"></i>
+                  </a>
+
+                  <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary float-left" role="menu">
+
+                    <a class="dropdown-item waves-light" mdbWavesEffect (click)="editBlogModal.show()"><i
+                        class="far far-edit"></i>Edit this post</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect (click)="deleteBlog()"> <i
+                        class="fas fa-ban"></i>
+                      Delete this post</a>
+
+                  </div>
+
+                </li>
+              </ul>
+
+            </div>
+          </div>
+
+        </h1>
+
+      </div>
+
+    </div>
+
+    <hr>
+
+    <p>{{blog.content}}</p>
+
+    <hr>
+    <button class="like" (click)="blogLiking()" [disabled]="hasDisliked()"><i class="far fa-thumbs-up" aria-hidden="true"> &nbsp;
+        {{blog.likes.length}}</i></button> &nbsp;
+    <button class="dislike" (click)="blogDisliking()" [disabled]="hasLiked()"><i class="far fa-thumbs-down" aria-hidden="true">
+        &nbsp;
+        {{blog.dislikes.length}}</i></button>
+
+
+    <div class="float-right">
+      <span class="fas fa-user"> {{blog.user.name}}</span> &nbsp;&nbsp;
+      <div></div>
+      <span class="far fa-calendar">{{blog.datePosted | date :"MMM"}} &nbsp; {{blog.datePosted | date :"dd"}}, &nbsp;
+        {{blog.datePosted | date :"yyyy"}}</span>
+
+    </div>
+
+  </div>
+</div>
+
+
+<div mdbModal #editBlogModal="mdbModal" class="modal" id="frameModalTop" tabindex="-1" role="dialog"
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Add New Blog</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="editBlogModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body mx-3">
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center justify-content-center">
+            <div>
+              <!-- Outline validation input Name -->
+              <div class="md-form md-outline animated fadeInUp fast">
+                <input mdbInput mdbValidate name="in_email" type="text" id="title" class="form-control"
+                  [(ngModel)]="edtBlog.title" #titleText="ngModel" required />
+                <label for="title">Title</label>
+                <mdb-error *ngIf="
+                    titleText.invalid && (titleText.dirty || titleText.touched)
+                  ">Input invalid</mdb-error>
+                <mdb-success *ngIf="
+                    titleText.valid && (titleText.dirty || titleText.touched)
+                  ">Input valid</mdb-success>
+              </div>
+
+              <div class="textwrapper browser-default" style="border-radius: 30px;">
+                <textarea class="textbox" style="width: 100%;" name="content" [(ngModel)]="edtBlog.content" rows="5"
+                  placeholder="Enter content"></textarea>
+              </div>
+
+              <div>Upload an image</div>
+
+              <div class="image-upload">
+                <label for="file-edit-input">
+                  <img src="https://goo.gl/pB9rpQ" />
+                </label>
+
+                <input id="file-edit-input" type="file" (change)="onImageSelect($event)" accept=".png, .jpg, .jpeg" />
+              </div>
+
+              <div class="news-img-wrapper" *ngIf="isEditFileSelected">
+                <hr />
+                <img [src]="imagePathToEdit" class="image-to-upload" />
+              </div>
+
+              
+              <div class="news-img-wrapper" *ngIf="blog.image != '' && !isEditFileSelected">
+                <hr />
+                <img [src]="sanitizeSrcImage(blog.image)" class="image-to-upload" />
+              </div>
+            </div>
+
+            <div class="modal-footer d-flex justify-content-center">
+              <button  mdbBtn type="button" style="border-radius: 30px;" color="teal" outline="true" (click)="editBlog()"
+                mdbWavesEffect>
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

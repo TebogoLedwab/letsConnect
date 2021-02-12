@@ -1,0 +1,20 @@
+<Banner img="add.svg" header1="" header2="Connekt"
+  header3="Connekt is an application that was built to help small businesses track down their intern's employment status in order for them to know how many employed or unemployed interns the company has produced."
+  header4=""></Banner>
+
+
+<Filter [searchLabel]="'Search Interns'" (filter_by)="handle_filter($event)" (search)="handle_search($event)"></Filter>
+
+<!--Home stuff start here-->
+<div style="height: 50px;"></div>
+
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-4" *ngFor="let profile of profiles">
+      <Interncard [profile]="profile"></Interncard>
+    </div>
+  </div>
+</div>
+
+
+<Footer></Footer>

@@ -1,0 +1,155 @@
+<div class="container" style="width:100%; margin-top:20px; " *ngIf="profile">
+  <div class="container">
+
+    <div class="card">
+      <div class="row">
+
+        <div class="col-md-7 col-sm-12 section section-left">
+
+          <div class="stuff text-center">
+            <h1>{{profile.user.name | titlecase}}</h1>
+            <div class="timeline" *ngFor="let exp of profile.experience">
+              <h5 *ngIf="exp.current == true">{{exp.title}}</h5>
+            </div>
+
+            <div class="details">
+
+              <h5 *ngIf="profile.user.email"><i class="fas fa-envelope"></i> {{profile.user.email}}</h5>
+              <h5 *ngIf="profile.user.mobile_number"><i class="fas fa-phone-alt"></i> {{profile.user.mobile_number}}
+              </h5>
+              <h5 *ngIf="profile.user.gender"><i class="fas fa-transgender-alt"></i> {{profile.user.gender}}</h5>
+              <h5 *ngIf="profile.user.age">{{profile.user.age}} Years old</h5>
+
+            </div>
+
+            <hr>
+
+            <div class="animated pulse slower infinite buttons">
+              <button mdbBtn type="button" style="border-radius: 30px;background-color: white;color: teal;"
+                outline="true">
+                <mdb-icon fab icon="kickstarter-k"></mdb-icon> {{profile.points}}
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- When the avatar is there -->
+        <!-- <div class="col-md-5 col-sm-12 section section-right profile-img" *ngIf="profile.user.avatar != ''"
+          [style.background-image]="sanitizeAvatar(profile.user.avatar)"> -->
+
+        <div class="col-md-5 col-sm-12 section section-right" *ngIf="profile.user.avatar != ''">
+
+          <img class=" profile-img" [src]="sanitizeAvatar(profile.user.avatar)" alt="">
+
+        </div>
+
+        <!-- When there is no avatar -->
+        <div class="col-md-5 col-sm-12   section section-right" *ngIf="profile.user.avatar == ''">
+
+          <img class=" profile-img" [src]="avatarUrl" alt="">
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="bio-card text-center">
+      {{profile.bio}}
+
+      <hr>
+
+      <div class="text-center">
+        <h3>
+          <mdb-icon fas icon="boxes"></mdb-icon> Interests
+        </h3>
+      </div>
+
+
+      <div *ngIf="profile.interests.length == 0" style="background-color: rgb(208, 208, 224);border-radius: 30px;"
+        class="text-center radial-border">
+        <h2>No Interests</h2>
+      </div>
+
+      <div class="interests" *ngFor="let interest of profile.interests">
+        <button mdbBtn type="button" style="border-radius: 30px;" color="teal" outline="true">{{interest}}</button>
+      </div>
+
+    </div>
+
+    <div class="card skills-card mt-5">
+
+      <div class="text-center">
+        <h3>
+          <mdb-icon fas icon="code"></mdb-icon> Programming Skills
+        </h3>
+      </div>
+
+      <div class="wrapper">
+        <div class="skill animated fadeIn" *ngFor="let skill of profile.skills">
+          <p class="m-1 mb-2">{{skill.skill}} <span class="skill-percentage"> -
+              {{skill.scale/5*100}}%</span></p>
+          <div class="skill-bar-container wow slideInLeft">
+            <span class="skill-bar" [style.width.%]="skill.scale/5*100"></span>
+          </div>
+        </div>
+
+        <div *ngIf="profile.skills.length == 0" style="background-color: rgb(208, 208, 224);border-radius: 30px;"
+          class="text-center radial-border">
+          <h2>No Skills</h2>
+        </div>
+
+      </div>
+
+
+    </div>
+
+    <div class="demo">
+      <div class="container">
+
+        <br>
+
+        <div class="text-center mt-1">
+          <h3>
+            <mdb-icon fas icon="business-time"></mdb-icon> Work Experience Timeline
+          </h3>
+
+          <div *ngIf="profile.experience.length == 0" style="background-color: rgb(208, 208, 224);border-radius: 30px;"
+            class="text-center radial-border">
+            <h2>No Interests</h2>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="main-timeline6">
+
+              <div class="timeline" *ngFor="let exp of profile.experience">
+                <div class="timeline-content">
+
+                  <span class="year"
+                    *ngIf="exp.current == false">{{exp.from | date: "dd MMM yyyy"}}-{{exp.to | date: "dd MMM yyyy"}}</span>
+                  <span class="year" *ngIf="exp.current == true">{{exp.from | date: "dd MMM yyyy"}} - Current</span>
+                  <div class="content-inner">
+                    <span class="icon"><i class="fa fa-briefcase"></i></span>
+                    <h5 class="title">{{exp.title}}</h5>
+                    <h6 class="title">{{exp.company}}</h6>
+                    <p class="description">
+                      {{exp.description}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<Footer></Footer>

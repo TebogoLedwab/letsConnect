@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+
+  meanfe:
+    build: ./fe
+    ports:
+    - "4200:4200"
+    container_name: meanfe
+    depends_on:
+      - meanbe
+
+  meanbe:
+    build: ./be
+    ports:
+    - "5000:5000"
+    container_name: meanbe
+    # restart: always
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    ports:
+      - '27017:27017' 
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:

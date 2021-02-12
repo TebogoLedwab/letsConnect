@@ -1,0 +1,43 @@
+.auth_img {
+  width: 500px;
+  transition: var(--transition-speed);
+  &:hover {
+    width: 520px;
+  }
+}
+
+
+h1{
+  font-weight: bold;
+}
+/* Small screens */
+@media only screen and (max-width: 600px) {
+  .konnectHeading {
+    margin-top: 20%;
+    text-align: center;
+    
+  }
+}
+
+/* Large screens */
+@media only screen and (min-width: 600px) {
+  .konnectHeading {
+  }
+}
+
+
+.parallax {
+    /* The image used */
+    background-image: url("../../../assets/images/gradient4.png");
+  
+    min-height: 94vh;
+
+    /* Set a specific height */
+    //min-height: 500px; 
+  
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }

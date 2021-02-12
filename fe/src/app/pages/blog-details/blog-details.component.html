@@ -1,0 +1,193 @@
+<div class="container" style="margin-top: 8vh;">
+
+  <div class="container mt-5" *ngIf="blog && blog.image && blog.image != ''">
+    <div class="row">
+      <div class="col-12">
+        <article class="blog-card">
+          <div class="blog-card__background">
+            <div class="card__background--wrapper">
+              <div class="card__background--main" [style.background-image]="sanitizeBlogImage(blog.image)">
+                <div class="card__background--layer"></div>
+              </div>
+            </div>
+          </div>
+          <div class="blog-card__head" (click)="imageViewModal.show()">
+            <span class="date__box">
+              <span class="date__day">{{blog.datePosted | date :'dd'}}</span>
+              <span class="date__month">{{blog.datePosted | date :'MMM'}}</span>
+            </span>
+          </div>
+          <div class="blog-card__info">
+            <div class="row">
+
+              <div class="col-md-1 post-options">
+                <div class="float-right align-v-center">
+                  <ul style="list-style: none;" class="float-right align-v-center"
+                    *ngIf="currentUser && currentUser._id == blog.user._id">
+                    <li class="nav-item avatar dropdown  float-right news-item" dropdown>
+
+                      <a dropdownToggle mdbWavesEffect type="button" class="nav-links" mdbWavesEffect>
+                        <i class="fas fa-ellipsis-h"></i>
+                      </a>
+
+                      <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+
+                        <a class="dropdown-item waves-light" mdbWavesEffect (click)="deleteBlog()"><i
+                            class="fas fa-pencil-alt"></i>
+                          Edit this post</a>
+                        <a class="dropdown-item waves-light" mdbWavesEffect (click)="deleteBlog()"> <i
+                            class="fas fa-ban"></i>
+                          Delete this post</a> <a class="dropdown-item waves-light" mdbWavesEffect
+                          (click)="deleteBlog()">Delete</a>
+                      </div>
+
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="col-7 blog-title">
+                <h4>{{blog.title}}</h4>
+              </div>
+
+              <div class="col-5 poster-info">
+
+                <!-- When there is a avatar -->
+                <img *ngIf="blog.user.avatar != ''" [src]="sanitizeBlogUserAvatar(blog.user.avatar)"
+                  class="poster-avatar float-right" />
+                <!-- When there is no avatar -->
+                <img *ngIf="blog.user.avatar == ''" [src]="avatarUrl" class="poster-avatar float-right" />
+
+                <a class="icon-link mr-4 float-right poster-name" (click)="view_profile(blog.user._id)"><i
+                    class="fa fa-pencil"></i> {{blog.user.name}} {{blog.user.avatar == ''}}</a>
+
+              </div>
+
+            </div>
+
+            <hr>
+
+            <p style="min-height: 80px;">{{blog.content}}</p>
+
+            <hr>
+
+            <div>
+
+              <button class="like" (click)="blogLiking()"><i class="far fa-thumbs-up" aria-hidden="true"> &nbsp;
+                  {{blog.likes.length}}</i></button> &nbsp;
+              <button class="dislike" (click)="blogDisliking()"><i class="far fa-thumbs-down" aria-hidden="true">
+                  &nbsp;
+                  {{blog.dislikes.length}}</i></button>
+
+            </div>
+
+          </div>
+
+        </article>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container mt-5" *ngIf="blog && (!blog.image || blog.image == '')">
+    <div class="row">
+      <div class="col-12">
+        <article class="blog-card-2">
+          <div class="blog-card__info">
+            <div class="row">
+
+              <div class="post-options">
+                <div class="float-right align-v-center">
+                  <ul style="list-style: none;" class="float-right align-v-center"
+                    *ngIf="currentUser && currentUser._id == blog.user._id">
+                    <li class="nav-item avatar dropdown  float-right news-item" dropdown>
+
+                      <a dropdownToggle mdbWavesEffect type="button" class="nav-links" mdbWavesEffect>
+                        <i class="fas fa-ellipsis-h"></i>
+                      </a>
+
+                      <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+
+                        <a class="dropdown-item waves-light" mdbWavesEffect (click)="deleteBlog()"><i
+                            class="fas fa-pencil-alt"></i>
+                          Edit this post</a>
+                        <a class="dropdown-item waves-light" mdbWavesEffect (click)="deleteBlog()"> <i
+                            class="fas fa-ban"></i>
+                          Delete this post</a>
+                      </div>
+
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="col-7 blog-title">
+                <h4>{{blog.title}}</h4>
+              </div>
+
+              <div class="col-5 poster-info">
+
+                <!-- When there is a avatar -->
+                <img *ngIf="blog.user.avatar != ''" [src]="sanitizeBlogUserAvatar(blog.user.avatar)"
+                  class="poster-avatar float-right" />
+                <!-- When there is no avatar -->
+                <img *ngIf="blog.user.avatar == ''" [src]="avatarUrl" class="poster-avatar float-right" />
+
+                <a class="icon-link mr-4 float-right poster-name" (click)="view_profile(blog.user._id)"><i
+                    class="fa fa-pencil"></i> {{blog.user.name}}</a>
+              </div>
+
+            </div>
+
+            <hr>
+
+            <p style="min-height: 80px;">{{blog.content}}</p>
+
+            <hr>
+
+            <div>
+
+              <button class="like" (click)="blogLiking()"><i class="far fa-thumbs-up" aria-hidden="true"> &nbsp;
+                  {{blog.likes.length}}</i></button> &nbsp;
+              <button class="dislike" (click)="blogDisliking()"><i class="far fa-thumbs-down" aria-hidden="true">
+                  &nbsp;
+                  {{blog.dislikes.length}}</i></button>
+
+              <div class="float-right">
+                {{blog.datePosted | date :'dd MMM yyyy'}}
+              </div>
+
+            </div>
+
+          </div>
+
+        </article>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div mdbModal #imageViewModal="mdbModal" class="modal" id="frameModalTop" tabindex="-1" role="dialog"
+  [style.background-image]="sanitizeBlogImage(blog.image)" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+
+    <div class="modal-content" style="background-color: transparent;box-shadow: none;">
+      <div class="modal-body">
+        <div class="modal-footer float-center">
+
+          <button class="like" (click)="blogLiking()"><i class="far fa-thumbs-up" aria-hidden="true"> &nbsp;
+              {{blog.likes.length}}</i></button> &nbsp;
+          <button class="dislike" (click)="blogDisliking()"><i class="far fa-thumbs-down" aria-hidden="true">
+              &nbsp;
+              {{blog.dislikes.length}}</i></button>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<Footer></Footer>

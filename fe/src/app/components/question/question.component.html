@@ -1,0 +1,144 @@
+<mdb-card class="question-card hoverable alt hoverable  wow fadeInUp slow">
+  <!-- Me -->
+
+  <mdb-card-header>
+    <div class="user_details">
+
+      <div class="float-left">
+
+        <!-- When there is a avatar -->
+        <img *ngIf="comm.user.avatar != ''" [src]="imagePath" class="user-profile-picture" alt="Cards Image" />
+        <!-- When there is no avatar -->
+        <img *ngIf="comm.user.avatar == ''" [src]="avatarUrl" class="user-profile-picture" alt="Cards Image" />
+
+        <span class="name">
+          {{comm.user.name}}
+          <br>
+
+        </span>
+
+      </div>
+
+
+      <!-- Button for deleting a community post -->
+      <span *ngIf="currentUser && currentUser._id == comm.user._id" (click)="deleteComm()" type="button"
+        class="float-right btn btn-outline-dark-green btn-sm px-2 waves-effect">
+        <i class="float-right fa fa-trash"></i>
+      </span>
+
+
+      <div class="date float-right" color="grey"><small>{{comm.datePosted |  date: 'dd - MMM - yyyy'}}</small></div>
+
+
+
+    </div>
+
+
+  </mdb-card-header>
+
+  <!-- Dinny -->
+  <mdb-card-body>
+
+
+    <h3>{{comm.title}}
+    </h3>
+
+
+
+    <p>{{comm.content}}</p>
+
+    <hr>
+
+    <div class="float-left button">
+
+      <button (click)="commLiking()" type="button" class="btn btn-outline-dark-green btn-sm px-2 waves-effect"
+        [disabled]="hasDisliked()">
+        <span class="value">{{comm.likes.length}}</span>
+        <i class="far fa-thumbs-up ml-1"></i>
+      </button>
+      <button (click)="commDisliking()" type="button" class="btn btn-outline-danger btn-sm px-2 waves-effect show_login"
+        [disabled]="hasLiked()">
+        <span class="value">{{comm.dislikes.length}}</span>
+        <i class="far fa-thumbs-down ml-1"></i>
+      </button>
+      <a type="button" class="btn btn-outline-dark-green btn-sm px-2 waves-effect" (click)="comments ? comments = false:
+      comments = true">
+        <span class="value ">{{comm.comments.length}}</span>
+        <i class="far fa fa-comments"></i>
+      </a>
+    </div>
+
+    <div class="float-right tags" *ngFor="let tag of comm.tags">
+      <h5>
+        <mdb-badge class="tag wow fadeIn slow" pill="true" [color]="randomColor()">{{tag}}</mdb-badge>
+      </h5>
+    </div>
+
+    <div *ngIf="comments">
+
+      <br><br>
+
+      <div class="search">
+
+        <!-- Adding a comment input area -->
+        <form>
+
+          <div class="md-form input-group mb-3 form-inline" *ngIf="currentUser">
+            <input type="text" name="commentText" [(ngModel)]="commentText" #commentTextBox="ngModel"
+              class="form-control" placeholder="Write a comment" aria-label="Recipient's username"
+              aria-describedby="MaterialButton-addon2">
+
+            <div class="input-group-append">
+              <button [disabled]="!commentTextBox.valid" mdbBtn class="btn btn-md m-0 px-3 radial-border" color="teal"
+                outline="true" type="button" (click)="addComment()" id="MaterialButton-addon2">Add</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+      <div id="">
+        <div class="animated fadeIn" *ngFor="let comment of comm.comments">
+
+          <div class="c-logs">
+            <div class="c-logs__list">
+
+              <div class="c-logs__item c-logs__item--primary">
+                <!-- When there is an avatar -->
+                <img *ngIf="comm.user.avatar != ''" [src]="sanitizeCommAvatar(comment.user_id.avatar)"
+                  class=" c-logs__avatar" alt="Cards Image" />
+                <!-- When there is no avatar -->
+                <img *ngIf="comm.user.avatar == ''"
+                  src="https://cdn.patchcdn.com/assets/layout/contribute/userImage.png" class="c-logs__avatar"
+                  alt="Cards Image" />
+
+                <div class="c-logs__body">
+                  <div class="c-logs__header">
+                    <div class=" c-logs__title">
+                      {{comment.user_id.name}}
+                    </div>
+
+                    <span class="float-right"><i *ngIf="currentUser && currentUser._id == comment.user_id._id"
+                        (click)="deleteComment(comment._id)" class=" fa fa-trash"></i></span>
+
+                    <div class="float-right date c-logs__time ml-5">{{comment.date |  date: 'dd MMM yyyy' }}</div>
+
+                  </div>
+                  <div class="c-logs__content">
+                    <p>{{comment.comment}}</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </mdb-card-body>
+
+</mdb-card>
+<div style="height: 50px;"></div>

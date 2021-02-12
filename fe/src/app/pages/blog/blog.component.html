@@ -1,0 +1,89 @@
+<Banner
+  img="draw.svg"
+  header1=""
+  header2="Blog"
+  header3="Share what's on your mind"
+  header4="Get updates on the latest tech news and trends"
+>
+</Banner>
+
+<Filter [searchLabel]="'Search Blog'" (filter_by)="handle_filter($event)" (search)="handle_search($event)"></Filter>
+
+<div *ngIf="auth.isUserLoggedIn()" id="circularMenu" class="circular-menu animated bounce" (click)="postBlogModal.show()">
+  <a class="floating-btn">
+    <i class="fas fa-pencil-alt"></i>
+  </a>
+</div>
+
+<!--JUST FOR TESTING-->
+<div style="min-height: 100vh; margin-top: 70px;">
+  
+  <div class="container" *ngFor="let blog of blogs">
+    <app-blogcard [blog]="blog"></app-blogcard>
+  </div>
+
+</div>
+
+<Footer></Footer>
+
+<div mdbModal #postBlogModal="mdbModal" class="modal" id="frameModalTop" tabindex="-1" role="dialog"
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Add New Blog</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="postBlogModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body mx-3">
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center justify-content-center">
+            <div>
+              <!-- Outline validation input Name -->
+              <div class="md-form md-outline animated fadeInUp fast">
+                <input mdbInput mdbValidate name="in_email" type="text" id="title" class="form-control"
+                  [(ngModel)]="newBlog.title" #titleText="ngModel" required />
+                <label for="title">Title</label>
+                <mdb-error *ngIf="
+                    titleText.invalid && (titleText.dirty || titleText.touched)
+                  ">Input invalid</mdb-error>
+                <mdb-success *ngIf="
+                    titleText.valid && (titleText.dirty || titleText.touched)
+                  ">Input valid</mdb-success>
+              </div>
+
+              <div class="textwrapper browser-default" style="border-radius: 30px;">
+                <textarea class="textbox" style="width: 100%;" name="content" [(ngModel)]="newBlog.content" rows="5"
+                  placeholder="Enter content"></textarea>
+              </div>
+
+              <div>Upload an image</div>
+
+              <div class="image-upload">
+                <label for="file-input">
+                  <img src="https://goo.gl/pB9rpQ" />
+                </label>
+
+                <input id="file-input" type="file" (change)="onImageSelect($event)" accept=".png, .jpg, .jpeg" />
+              </div>
+
+              <div class="image-preview animated fadeInDown" *ngIf="imagePathToUpload">
+                <hr />
+                <img [src]="imagePathToUpload" class="image-to-upload animated fadeInUp" />
+              </div>
+            </div>
+
+            <div class="modal-footer d-flex justify-content-center">
+              <button mdbBtn type="button" style="border-radius: 30px;" color="teal" outline="true" (click)="postBlog()"
+                mdbWavesEffect>
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

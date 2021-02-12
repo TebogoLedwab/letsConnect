@@ -1,0 +1,43 @@
+<div style="height: 80vh;">
+  <div class="flex-center">
+
+    <div class="col-md-10">
+      <div class="text-center animated fadeInUp faster">
+        <img src="../../../assets/images/avatar.svg" class="img-fluid mb-3" width="65px" alt="Responsive image">
+      </div>
+
+
+      <h2 class="text-muted text-center font-weight-bold animated fadeInUp faster">Forget password</h2>
+
+      <!-- Outline validation input -->
+      <div class="md-form md-outline animated fadeInUp fast">
+        <input mdbInput mdbValidate name="in_email" type="email" id="in_email" class="form-control"
+          [(ngModel)]="in_email" #inEmail="ngModel" required pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" />
+        <label for="in_email">Email</label>
+        <mdb-error *ngIf="inEmail.invalid && (inEmail.dirty || inEmail.touched)">Input invalid</mdb-error>
+        <mdb-success *ngIf="inEmail.valid && (inEmail.dirty || inEmail.touched)">Input valid</mdb-success>
+      </div>
+
+      <div class="text-right hand auth_small animated fadeInUp my-2" (click)="switch_component_to('Signin')">
+        Have an account? Login
+      </div>
+
+      <div class="text-center animated pulse" *ngIf="inEmail.valid">
+        <button mdbBtn type="button" style="border-radius: 30px;" color="teal" outline="true"
+          (click)="forget_password()" mdbWavesEffect>Reset password</button>
+      </div>
+
+      <div class="text-center animated pulse" *ngIf="!(inEmail.valid)">
+        <button mdbBtn type="button" style="border-radius: 30px;" color="teal" outline="true" disabled
+          mdbWavesEffect>Reset password</button>
+      </div>
+
+      <div class="text-center hand auth_small mt-4 animated fadeInUp fast" (click)="switch_component_to('Signup')">
+        Not a member? Register
+      </div>
+
+    </div>
+
+
+  </div>
+</div>

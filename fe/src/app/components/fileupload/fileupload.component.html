@@ -1,0 +1,73 @@
+<!-- Upload Image Modal -->
+<div mdbModal #uploadImageModal="mdbModal" class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog"
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Add Image</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="uploadImageModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body mx-3">
+        <div class="wrapper">
+          <div class="file-upload">
+            <input type="file" (change)="onImageSelect($event)" [accept]="accept" />
+            <i class="fa fa-arrow-up"></i>
+          </div>
+        </div>
+
+        <div class="image-preview animated fadeInDown" *ngIf="imagePathToUpload">
+          <hr />
+          <img [src]="imagePathToUpload" class="image-to-upload animated fadeInUp" />
+        </div>
+      </div>
+
+      <div class="modal-footer d-flex justify-content-center">
+        <button  mdbBtn type="button" style="border-radius: 30px;" color="teal" outline="true" [disabled]="!isFileSelected"
+          (click)="saveImage()" mdbWavesEffect>
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Upload Document Modal -->
+
+<div mdbModal #uploadDocumentModal="mdbModal" class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog"
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Add CV</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          (click)="uploadDocumentModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="wrapper">
+          <div class="file-upload">
+            <input type="file" (change)="onCvSelect($event)" accept=".pdf" />
+            <i class="fa fa-arrow-up"></i>
+          </div>
+        </div>
+
+        <div *ngIf="documentPath" class="pdfPreview">
+          <pdf-viewer [src]="documentPath" [render-text]="true" [original-size]="false" [fit-to-page]="false"
+            [show-all]="false" [page]="1" [show-borders]="true" style="display: block;"></pdf-viewer>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button mdbBtn class="waves-light primary-btn" mdbWavesEffect [disabled]="!isFileSelected"
+          (click)="saveDocument()">
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+
+  

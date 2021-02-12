@@ -1,0 +1,143 @@
+@import "~animate.css/animate.min";
+@import "~ngx-toastr/toastr.css";
+
+:root {
+  --transition-speed: 600ms;
+  --body-color: #505050;
+  --body-background-color: #fafafa;
+  --konnect-green: #009688;
+}
+
+body {
+  background-color: var(--body-background-color);
+  color: var(--body-color);
+  font-family: Gotham Narrow,-apple-system,Segoe UI,system-ui,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+
+  
+}
+// change the default scroll
+body::-webkit-scrollbar {
+  width: 0.25rem;
+}
+body::-webkit-scrollbar-track {
+  background: var(--body-color);
+}
+body::-webkit-scrollbar-thumb {
+  background: var(--konnect-green);
+}
+
+
+/* 
+ *  Toaster Syling
+*/
+.toast-progress {
+  background-color: #ffffff !important;
+}
+.toast-success {
+  background-color: #306060cb;
+}
+.toast-error {
+  background-color: #a53f3fcf;
+}
+.toast-warning {
+  background-color: #ff7b00cf;
+}
+.toast-info {
+  background-color: #032aaccf;
+}
+
+/* Small screens */
+@media only screen and (max-width: 600px) {
+}
+
+/* Large screens */
+@media only screen and (min-width: 600px) {
+}
+
+/* cursor defaults */
+.hand {
+  cursor: pointer;
+}
+.no_hand {
+  cursor: none;
+}
+
+// change inputs colors
+.md-form.md-outline input[type="email"]:focus:not([readonly]),
+.md-form.md-outline input[type="password"]:focus:not([readonly]),
+.md-form.md-outline input[type="search"]:focus:not([readonly]),
+.md-form.md-outline input[type="text"]:focus:not([readonly]),
+.md-form.md-outline input[type="checkbox"]:focus:not([readonly]) {
+  border-color: #169688;
+  box-shadow: inset 0px 0px 0px 1px #169688;
+}
+
+// change inputs colors
+.md-form.md-outline input[type="email"]:focus:not([readonly]),
+textarea {
+  border-color: #169688;
+  box-shadow: inset 0px 0px 0px 1px #169688;
+  padding: 10px;
+  width: 100%;
+}
+
+// all authentication style
+.auth_small {
+  font-style: italic;
+  transition: var(--transition-speed);
+
+  &:hover {
+    letter-spacing: 1px;
+  }
+}
+
+//Modal
+.modal-dialog .modal-content {
+  border-radius: 50px !important;
+}
+
+// change the default scroll
+.modal::-webkit-scrollbar {
+  width: 0.25rem;
+}
+.modal::-webkit-scrollbar-track {
+  background: var(--body-color);
+}
+.modal::-webkit-scrollbar-thumb {
+  background: var(--konnect-green);
+}
+
+//preview image to upload
+.image-to-upload {
+  border-radius: 2rem;
+  max-width: 430px;
+  min-width: 430px;
+  max-height: 200px;
+  min-height: 200px;
+}
+
+/* Circular Menu */
+.circular-menu {
+  z-index: 999;
+  position: fixed;
+  bottom: 1em;
+  right: 1em;
+}
+
+.circular-menu .floating-btn {
+  display: block;
+  width: 3.5em;
+  height: 3.5em;
+  border-radius: 50%;
+  background-color: var(--konnect-green);
+  box-shadow: 0 2px 5px 0 hsla(0, 0%, 0%, 0.26);
+  color: hsl(0, 0%, 100%) !important;
+  text-align: center;
+  line-height: 3.9;
+  cursor: pointer;
+  outline: 0;
+
+  &:hover {
+      background-color: #696969;
+  }
+}

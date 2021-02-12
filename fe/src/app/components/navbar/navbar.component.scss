@@ -1,0 +1,38 @@
+.navbar {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    margin-bottom: -197px;
+}
+
+.avatar-circle {
+    width: 40px;
+    height: 40px;
+    background-color: var(--body-background-color);
+    text-align: center;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    transition: var(--transition-speed);
+    &:hover {
+        background-color: var(--konnect-green);
+        .initials {
+            color: var(--body-background-color);
+            font-size: 35px;
+        }
+    }
+  }
+
+  .initials {
+    position: relative;
+    top: 8px; /* 25% of parent */
+    font-size: 20px;
+    line-height: 25px;
+    color: var(--konnect-green);
+    font-family: Gotham Narrow,-apple-system,Segoe UI,system-ui,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-weight: bold;
+    transition: var(--transition-speed);
+  }

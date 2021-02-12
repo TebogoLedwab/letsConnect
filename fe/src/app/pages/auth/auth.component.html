@@ -1,0 +1,26 @@
+<div class="parallax">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 d-none d-md-block">
+                <div class="flex-center flex-column animated fadeIn">
+                    <img src="../../../assets/images/phone.svg" class="img-fluid auth_img"
+                        alt="Responsive image">
+                </div>
+            </div>
+            <div class="col-md-6" *ngIf="component === 'Signin'">
+                <Signin (switch_component)="handle_switch_component($event)"></Signin>
+            </div>
+            <div class="col-md-6" *ngIf="component === 'Signup'">
+                <Signup (switch_component)="handle_switch_component($event)"></Signup>
+            </div>
+            <div class="col-md-6" *ngIf="component === 'Forget'">
+                <Forget (switch_component)="handle_switch_component($event)"></Forget>
+            </div>
+            <div class="col-md-6" *ngIf="component === 'Admin Signin'">
+                <Adminsignin (switch_component)="handle_switch_component($event)"></Adminsignin>
+            </div>
+        </div>
+    </div>
+</div>
+
+

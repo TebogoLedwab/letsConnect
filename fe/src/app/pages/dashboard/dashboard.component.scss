@@ -1,0 +1,414 @@
+$bodyBg: #ffffff;
+$logoColor: #9067c6;
+$textColor: darken(#c4cece, 20%);
+
+.top-section {
+    padding-top: 40px;
+   // padding-left: 30px;
+    background-color: #f4f7f8;
+    border-radius: 2rem;
+    margin: 30;
+   //mobile view css 
+    @media screen and (max-width: 600px) {
+       .top-section{
+        padding: 30px;
+        background-color: #f4f7f8;
+        border-radius: 2rem;
+        min-width: 100%;
+       }
+    }
+}
+
+.flex-center {
+    border-radius: 2rem !important;
+}
+
+.main {
+    background-color: $bodyBg;
+    padding: 20px;
+    border-radius: 2rem;
+    .main-content {
+        //margin-left: 200px;
+        padding: 2rem;
+        padding-top: 0.5rem;
+        margin: 10px;
+        .back {
+            color: $textColor;
+            i {
+                margin-right: 0.25rem;
+                font-size: 0.85rem;
+                font-family: Gotham Narrow, -apple-system, Segoe UI, system-ui, Roboto, Helvetica Neue, Helvetica, Arial,
+                    sans-serif;
+            }
+        }
+        .main-img-card {
+            border-radius: 2rem;
+            overflow: hidden;
+            max-width: 100%;
+
+            .card-img {
+                max-height: 400px;
+                max-width: 100%;
+                transition: all 0.2s;
+
+                &:hover {
+                    transition: all 0.2s;
+                    border-radius: 2rem;
+                    border: solid var(--konnect-green);
+                }
+            }
+        }
+        .btn-collected {
+            margin-top: 15px;
+            cursor: initial;
+            background-color: var(--konnect-green);
+            color: white;
+            margin-left: auto;
+            margin-right: auto;
+            width: auto;
+            display: block;
+            border-radius: 2rem;
+        }
+    }
+}
+
+.details {
+    text-align: center;
+    display: block;
+}
+
+.upload-image-icon {
+    cursor: pointer;
+    visibility: visible;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 99 !important;
+    border-radius: 50%;
+    color: var(--bg-primary) !important;
+}
+
+.exp-container {
+    margin-top: 30px;
+}
+
+.docs-container {
+    margin-top: 30px;
+}
+
+.documents-container {
+    padding: 20px;
+    transition: all 0.3s ease-out; // note that we're transitioning max-height, not height!
+    max-height: 0;
+}
+
+// Skills Section
+.user-documents {
+    border-radius: 2rem;
+    background-color: #f4f7f8;
+    padding: 30px;
+}
+
+.interests-container {
+    margin-top: 20px;
+    border-radius: 2rem;
+    background-color: #f4f7f8;
+    padding: 30px;
+}
+
+.user-skills {
+    border-radius: 2rem;
+    background-color: #f4f7f8;
+}
+
+.delete-skill-icon {
+    visibility: hidden;
+}
+
+.chip {
+    display: inline-block;
+    margin-top: 10px;
+    margin-right: 10px;
+    padding: 10px 10px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: var(--konnect-green);
+    color: white;
+}
+
+.chip:hover {
+    .delete-skill-icon {
+        visibility: visible;
+    }
+}
+
+.clear-all, .far:hover {
+    cursor: pointer;
+}
+
+/* Appy Button */
+.circular-menu {
+    position: fixed;
+    bottom: 1em;
+    right: 1em;
+}
+
+.circular-menu .floating-btn {
+    display: block;
+    width: 3.5em;
+    height: 3.5em;
+    border-radius: 50%;
+    background-color: var(--konnect-green);
+    box-shadow: 0 2px 5px 0 hsla(0, 0%, 0%, 0.26);
+    color: hsl(0, 0%, 100%);
+    text-align: center;
+    line-height: 3.9;
+    cursor: pointer;
+    outline: 0;
+    margin-right: 25px;
+
+    &:hover {
+        background-color: #696969;
+    }
+
+    @media screen and (max-width: 600px) {
+        .circular-menu .floating-btn{
+            margin-right: 25px;
+        }
+     }
+}
+
+.circular-menu.active .floating-btn {
+    box-shadow: inset 0 0 3px hsla(0, 0%, 0%, 0.3);
+}
+
+.circular-menu .floating-btn:active {
+    box-shadow: 0 4px 8px 0 hsla(0, 0%, 0%, 0.4);
+}
+
+.circular-menu .floating-btn i {
+    font-size: 1.3em;
+    transition: transform 0.2s;
+}
+
+.circular-menu.active .floating-btn i {
+    transform: rotate(-45deg);
+}
+
+.slider {
+    color: var(--konnect-green);
+}
+
+#GC .slider-selection {
+    background-color: #428041 !important;
+}
+#GC .slider-handle {
+    background-color: green !important;
+}
+
+.wrapper {
+    font-family: "Roboto", sans-serif;
+    margin: 0 auto;
+}
+.skill {
+    margin-bottom: 35px;
+    position: relative;
+    overflow: hidden;
+
+    &:hover{
+        .skill-percentage{
+            opacity:1;
+        }
+    }
+
+}
+.skill-percentage{
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+.skill > p {
+    font-size: 18px;
+    font-weight: 200;
+    color: #1a1716;
+    margin: 0;
+}
+.skill-bar-container {
+    width: 100%;
+    height: 10px;
+    content: "";
+    display: block;
+    position: absolute;
+    background: #9da09f;
+    border-radius: 2rem;
+    bottom: 0;
+    transition: all 0.5s ease;
+
+    &:hover {
+        background: rgb(145, 182, 174);
+    }
+}
+.skill-bar {
+    height: 10px;
+    border-radius: 2rem;
+    background: var(--konnect-green);
+    display: block;
+    position: relative;
+    transition: all 0.5s ease;
+
+    &:hover {
+        background: #fff;
+    }
+}
+
+/* SKILL */
+.skill {
+    width: 100%;
+}
+
+/**************************
+      NOTIFICATIONS
+**************************/
+
+.modal-dialog .modal-content {
+    border-radius: 50px 0 0 50px !important;
+}
+
+@import url("https://use.fontawesome.com/releases/v5.13.0/css/all.css");
+
+.note {
+    border: 0.05em solid darken(#eee, 15%);
+    border-left-width: 0.2em;
+    border-radius: 0.2em;
+    color: #333;
+    font-family: sans-serif;
+    font-size: 1em;
+    margin: 1em;
+    padding: 1.2em 1.2em * 1.7;
+    position: relative;
+
+    &:before,
+    &:after {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        margin-left: -0.2em / 2;
+    }
+
+    &:before {
+        border-radius: 50%;
+        content: "";
+        width: 1.2em * 1.7;
+        height: 1.2em * 1.7;
+    }
+
+    &:after {
+        color: #fff;
+        font: normal normal normal 0.9em/1 "FontAwesome";
+        font-weight: normal;
+        font-size: normal;
+        z-index: 50;
+    }
+}
+
+.note-default {
+    &:before {
+        background: darken(#eee, 15%);
+    }
+
+    &:after {
+        content: "\f0f3";
+    }
+}
+
+.note-info {
+    border-color: lighten(#54a6dd, 20%);
+    border-left-color: #54a6dd;
+    color: darken(#54a6dd, 20%);
+
+    &:before {
+        background: #54a6dd;
+    }
+
+    &:after {
+        content: "\f129";
+    }
+}
+
+.note-success {
+    border-color: lighten(#00e51a, 20%);
+    border-left-color: #00e51a;
+    color: darken(#00e51a, 20%);
+
+    &:before {
+        background: #00e51a;
+    }
+
+    &:after {
+        content: "\f00c";
+    }
+
+    &.alt {
+        &:after {
+            content: "\f164";
+        }
+    }
+}
+
+.note-warning {
+    border-color: lighten(#fcbf19, 20%);
+    border-left-color: #fcbf19;
+    color: darken(#fcbf19, 20%);
+
+    &:before {
+        background: #fcbf19;
+    }
+
+    &:after {
+        content: "\f071";
+    }
+}
+
+.note-emergency {
+    border-color: lighten(#ff0000, 20%);
+    border-left-color: #ff0000;
+    color: darken(#ff0000, 20%);
+
+    &:before {
+        background: #ff0000;
+    }
+
+    &:after {
+        content: "\f0f9";
+    }
+}
+
+.note-low-vision {
+    border-color: lighten(#000, 20%);
+    border-left-color: #000;
+    color: #fff;
+
+    &:before {
+        background: #000;
+    }
+
+    &:after {
+        content: "\f2a8";
+    }
+}
+
+.fa-trash-alt {
+    transition: all 0.4s;
+    &:hover {
+        color: hsl(0, 0%, 100%);
+        transition: all 0.4s;
+    }
+}
+
+.waves-effect {
+    position: relative;
+    cursor: pointer;
+    overflow: visible;
+  
+}

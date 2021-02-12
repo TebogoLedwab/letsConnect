@@ -1,0 +1,132 @@
+<main id="app">
+
+  <div class="row">
+    <div class="col-md-11">
+      <h3>
+        <mdb-icon fas icon="business-time"></mdb-icon> Work Experience Timeline
+      </h3>
+    </div>
+
+    <div class="col-1 float-right">
+      <h1 mdbBtn floating="true" size="lg" data-toggle="collapse" data-target="#addForm" aria-expanded="true"
+        aria-controls="collapseOne" mdbWavesEffect (click)="ShowForm ? ShowForm = false : ShowForm = true;">
+        <mdb-icon fas icon="plus-circle"></mdb-icon>
+      </h1>
+    </div>
+  </div>
+
+  <!-- Woerk Experience Form -->
+
+  <div id="addForm" class="animated fadeInDown" aria-labelledby="headingOne" data-parent="#addFormBody"
+    *ngIf="ShowForm == true">
+
+    <form class="text-center  p-5">
+
+      <p class="h4 mb-4 wow fadeIn">Add Work Experience</p>
+
+
+      <div class="md-form md-outline ">
+        <input mdbInput mdbValidate name="companyName" type="text" id="companyName" class="form-control"
+          [(ngModel)]="companyName" #company required pattern="^\s*(?:\S\s*){2,100}$" />
+        <label for="company">Company Name</label>
+        <mdb-error *ngIf="company.invalid && (company.dirty || company.touched)">Input invalid
+        </mdb-error>
+        <mdb-success *ngIf="company.valid && (company.dirty || company.touched)">Input valid
+        </mdb-success>
+      </div>
+
+
+      <div class="md-form md-outline ">
+        <input mdbInput mdbValidate name="jobTittle" type="text" id="jobTittle" class="form-control"
+          [(ngModel)]="jobTittle" #title required pattern="^\s*(?:\S\s*){2,100}$" />
+        <label for="jobTittle">Job Title</label>
+        <mdb-error *ngIf="title.invalid && (title.dirty || title.touched)">Input invalid</mdb-error>
+        <mdb-success *ngIf="title.valid && (title.dirty || title.touched)">Input valid</mdb-success>
+      </div>
+
+
+      <div class="md-form md-outline">
+        <input mdbInput mdbValidate name="location" type="text" id="location" class="form-control"
+          [(ngModel)]="location" #loc required pattern="^\s*(?:\S\s*){2,100}$" />
+        <label for="location">Location</label>
+        <mdb-error *ngIf="loc.invalid && (loc.dirty || loc.touched)">Input invalid</mdb-error>
+        <mdb-success *ngIf="loc.valid && (loc.dirty || loc.touched)">Input valid</mdb-success>
+      </div>
+
+
+      <div>
+        <mdb-checkbox [(ngModel)]="currentJob" name="currentJob">Current Job?</mdb-checkbox>
+      </div>
+
+      <div *ngIf="currentJob" class="md-form md-outline ">
+        <input mdbInput mdbValidate type="date" #fromDate class="form-control mb-4" name="from" [(ngModel)]="from"
+          required />
+        <label for="from">Starting Date</label>
+        <mdb-error *ngIf="fromDate.invalid && (fromDate.dirty || fromDate.touched)">Input invalid</mdb-error>
+        <mdb-success *ngIf="fromDate.valid && (fromDate.dirty || fromDate.touched)">Input valid</mdb-success>
+      </div>
+
+
+      <div *ngIf="!currentJob" class="form-row mb-4">
+        <div class="col-6 radial-border">
+
+          <div *ngIf="!currentJob" class="md-form md-outline">
+            <input mdbInput mdbValidate type="date" #fromD class="form-control mb-4" name="from" [(ngModel)]="from"
+              required />
+            <label for="from">Starting Date</label>
+            <mdb-error *ngIf="fromD.invalid && (fromD.dirty || fromD.touched)">Input invalid</mdb-error>
+            <mdb-success *ngIf="fromD.valid && (fromD.dirty || fromD.touched)">Input valid</mdb-success>
+          </div>
+
+
+        </div>
+        <div class="col-6 radial-border">
+
+          <div *ngIf="!currentJob" class="md-form md-outline radial-border">
+            <input mdbInput mdbValidate type="date" #endDate class="form-control mb-4" name="to" [(ngModel)]="to"
+              required />
+            <label for="to">Ending Date</label>
+            <mdb-error *ngIf="endDate.invalid && (endDate.dirty || endDate.touched)">Input invalid</mdb-error>
+            <mdb-success *ngIf="endDate.valid && (endDate.dirty || endDate.touched)">Input valid</mdb-success>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="textwrapper browser-default radial-border">
+        <textarea class="textbox" name="description" [(ngModel)]="description" rows="5" placeholder="Bio"></textarea>
+      </div>
+
+      <button mdbBtn type="button" style="border-radius: 30px; width: 100%;" color="white" outline="true"
+        (click)='emitExperience()'>
+        Add</button>
+
+    </form>
+
+  </div>
+
+  <section class="timeline wow fadeIn slow">
+    <ul>
+      <li class="wow fadeIn slower" *ngFor="let exp of experience">
+        <span></span>
+        <div>{{ exp.title }} - {{ exp.company }}</div>
+
+        <div class="ryear">
+          <span>{{ exp.from | date: "dd MMM yyyy" }} - </span>
+          <span *ngIf="!exp.current">{{ exp.to | date: "dd MMM yyyy"}}</span>
+          <span *ngIf="exp.current"> current </span>
+        </div>
+
+        <div>{{ exp.description }}</div>
+
+        <div class="float-right delete-icon">
+          <button mdbBtn color="teal" class="waves-light radial-border" type="button" (click)="deleteExperience(exp)"
+            mdbWavesEffect>
+            <mdb-icon fas icon="trash-alt"></mdb-icon>
+          </button>
+        </div>
+
+      </li>
+    </ul>
+  </section>
+</main>

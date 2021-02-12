@@ -1,0 +1,94 @@
+<Banner img="chat.svg" header1="" header2="Community" header3="Get coding help and tips"
+  header4="Help others and get points for interacting"></Banner>
+
+
+    <Filter [searchLabel]="'Search Community'" (filter_by)="handle_filter($event)" (search)="handle_search($event)"></Filter>
+
+<br>
+
+
+<div *ngIf="auth.isUserLoggedIn()" id="circularMenu" class="circular-menu animated bounce" (click)="addPostModal.show()">
+  <a class="floating-btn">
+    <i class="fa fa-plus"></i>
+  </a>
+</div>
+
+<!-- Edit Personal Details Modal -->
+<div mdbModal #addPostModal="mdbModal" class="modal fade right" id="frameModalTop" tabindex="-1" role="dialog"
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Post to community</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="addPostModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body mx-3">
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center justify-content-center">
+
+            <div>
+
+              <!-- Outline validation input Name -->
+              <div class="md-form md-outline" style="border-radius: 30px;">
+                <input mdbInput mdbValidate name="title" type="text" id="title" class="form-control"
+                  [(ngModel)]="newComm.title" #titleText="ngModel" required pattern="^\s*(?:\S\s*){2,100}$" />
+                <label for="title">Title</label>
+                <mdb-error *ngIf="titleText.invalid && (titleText.dirty || titleText.touched)">Input
+                  invalid</mdb-error>
+                <mdb-success *ngIf="titleText.valid && (titleText.dirty || titleText.touched)">Input
+                  valid</mdb-success>
+              </div>
+
+              <!-- Outline validation input Name -->
+              <div class="md-form md-outline" style="border-radius: 30px;">
+                <input mdbInput mdbValidate name="tags" type="text" id="tags" class="form-control" [(ngModel)]="newTags"
+                  (keyup)="addTags($event)" #tagsText="ngModel" required pattern="^\s*(?:\S\s*){2,100}$" />
+                <label for="tags">Tags</label>
+                <mdb-error *ngIf="tagsText.invalid && (tagsText.dirty || tagsText.touched)">Input
+                  invalid</mdb-error>
+                <mdb-success *ngIf="tagsText.valid && (tagsText.dirty || tagsText.touched)">Input valid
+                </mdb-success>
+              </div>
+
+              <div class="tags text-left animated fadeIn" *ngIf="newComm.tags.length > 0">
+                <mdb-badge class="tag animated fadeIn" color="teal" *ngFor="let tag of newComm.tags">
+                  {{tag}}
+                </mdb-badge>
+              </div>
+
+              <div class="textwrapper browser-default" style="border-radius: 30px;">
+                <textarea class="textbox" style="width: 100%;" name="content" [(ngModel)]="newComm.content" rows="5"
+                  placeholder="Enter content"></textarea>
+              </div>
+
+            </div>
+
+            <div class="modal-footer d-flex justify-content-center">
+              <button mdbBtn type="button" style="border-radius: 30px;" color="teal" outline="true" class="waves-light"
+                (click)="postComm()" mdbWavesEffect>Save</button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!--JUST FOR TESTING-->
+<div class="container">
+  <!--will loop to display only questions out-->
+  <div *ngFor="let comm of comms">
+    <Question [comm]="comm"></Question>
+  </div>
+</div>
+
+<Footer></Footer>

@@ -1,0 +1,112 @@
+/* =====================
+
+    Upload Image Modal
+
+======================== */
+.pdfPreview {
+    overflow: hidden;
+    border: solid grey;
+    max-width: 400px;
+    min-width: 400px;
+    max-height: 200px;
+    min-height: 200px;
+}
+
+.modal{
+ overflow: auto;   
+}
+
+.upload {
+    cursor: pointer;
+}
+
+.wrapper {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .file-upload {
+        cursor: pointer;
+        height: 200px;
+        width: 200px;
+        border-radius: 100px;
+        position: relative;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        overflow: hidden;
+        background-image: linear-gradient(to bottom, white 50%, var(--konnect-green) 50%);
+        border: solid var(--konnect-green);
+        background-size: 100% 200%;
+        transition: all 1s;
+        color: var(--konnect-green);
+        font-size: 100px;
+
+        input[type="file"] {
+            cursor: pointer;
+            height: 200px;
+            width: 200px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        &:hover {
+            background-position: 0 -100%;
+            background-color: var(--konnect-green);
+            color: var(--white);
+        }
+    }
+}
+
+.img-wrapper {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .file-upload {
+        cursor: pointer;
+        height: 200px;
+        width: 200px;
+        border-radius: 100px;
+        position: relative;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        overflow: hidden;
+        transition: all 1s;
+        color: var(--konnect-green);
+        font-size: 100px;
+
+        input[type="file"] {
+            cursor: pointer;
+            height: 200px;
+            width: 200px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        &:hover {
+            background-position: 0 -100%;
+            background-color: var(--konnect-green);
+            color: var(--white);
+        }
+    }
+}
+
+

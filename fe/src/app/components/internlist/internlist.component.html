@@ -1,0 +1,64 @@
+<div class="container">
+
+  <!-- <strong><span class="title">All Registered Users</span></strong> -->
+
+  <div class="table-containers">
+
+    <h2>All users</h2>
+
+
+    <table mdbTable class="table">
+      <thead class="teal white-text" style="border-radius: 50px !important;">
+        <tr>
+          <th><strong>Name</strong></th>
+          <th><strong>Points</strong></th>
+          <th><strong>Last Update</strong></th>
+          <th><strong>Status</strong></th>
+          <th><strong>Actions</strong></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="wow fadeIn slower" *ngFor="let profile of allProfiles">
+          <!-- <td ><a [routerLink]="['profile',profile._id]">{{profile.user.name}}</a></td> -->
+          <td>
+            <h5 (click)="viewProfile(profile)" class="user-link">{{profile.user.name}}</h5>
+          </td>
+          <td>
+
+            <div>
+              <button mdbBtn type="button" style="border-radius: 30px;" color="teal" outline="true">
+                <mdb-icon fab icon="kickstarter-k"></mdb-icon> {{profile.points}}
+              </button>
+            </div>
+
+          </td>
+          <td data-column="Date">{{profile.date  | date :"dd-MM-yyy"}}
+          </td>
+          <td>
+
+            <div *ngIf="profile" style="width: 100%;">
+              <select class="browser-default custom-select" #status name="status" [(ngModel)]="profile.status"
+                class="form-control">
+                <option [selected]="profile.status == 'Intern'" value="Intern">Intern</option>
+                <option [selected]="profile.status == 'Graduated'" value="Graduated">Graduated</option>
+                <option [selected]="profile.status == 'Removed'" value="Removed">Removed</option>
+                <option [selected]="profile.status == 'Resigned'" value="Resigned">Resigned</option>
+              </select>
+            </div>
+
+          </td>
+          <td>
+
+            <button mdbBtn type="button" (click)="saveUser(profile)" style="border-radius: 30px;" color="teal"
+              >
+              <i class="fas fa-download"></i> Save
+            </button>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</div>

@@ -1,0 +1,105 @@
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark teal sticky-top">
+  <mdb-navbar-brand>
+    <a class="navbar-brand" routerLink="home">
+      <img src="../../../assets/images/connekt-logo.png" height="30" class="d-inline-block align-top" alt="" />
+    </a>
+  </mdb-navbar-brand>
+
+  <links>
+    <ul class="navbar-nav">
+
+      <!-- User Links -->
+      <li class="nav-item" routerLinkActive="active" *ngIf="!authService.isAdminAuthenticated()">
+        <a class="nav-link waves-light" routerLink="home" mdbWavesEffect>
+          <mdb-icon fas icon="warehouse"></mdb-icon> Home<span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" routerLink="konnect" *ngIf="!authService.isAdminAuthenticated()">
+        <a class="nav-link waves-light" routerLink="konnect" mdbWavesEffect>
+          <mdb-icon fab icon="mendeley"></mdb-icon> Community<span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" routerLink="blog" *ngIf="!authService.isAdminAuthenticated()">
+        <a class="nav-link waves-light" routerLink="blog" mdbWavesEffect>
+          <mdb-icon fas icon="blog"></mdb-icon> Blog<span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" routerLink="dash" *ngIf="authService.isUserAuthenticated()">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="dash">
+          <mdb-icon fas icon="user"></mdb-icon> Dashboard<span class="sr-only">(current)</span>
+        </a>
+      </li>
+
+      <!-- Admin Links -->
+      <li class="nav-item" routerLinkActive="active" routerLink="admindash" *ngIf="authService.isAdminAuthenticated()">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="admindash">
+          <mdb-icon fas icon="chart-line"></mdb-icon> Dashboard<span class="sr-only">(current)</span>
+        </a>
+      </li>
+ <!-- About Links -->
+ <li class="nav-item" routerLinkActive="active" routerLink="about" *ngIf="!authService.isAdminAuthenticated()">
+    <a class="nav-link waves-light" mdbWavesEffect routerLink="about">
+      <mdb-icon fas icon="info"></mdb-icon> About<span class="sr-only">(current)</span>
+    </a>
+  </li>
+      <!-- <li class="nav-item" routerLinkActive="active" routerLink="applications"
+        *ngIf="authService.isAdminAuthenticated()">
+        <a class="nav-link waves-light" mdbWavesEffect>
+          <mdb-icon fab icon="autoprefixer"></mdb-icon> Applications<span class="sr-only">(current)</span>
+        </a>
+      </li> -->
+
+    </ul>
+
+    <ul class="navbar-nav ml-auto">
+      <a mdbBtn color="light" outline="true" size="sm" class="my-0 waves-light" routerLink="auth" mdbWavesEffect
+        *ngIf="!authService.isUserAuthenticated() && !authService.isAdminAuthenticated()">Account</a>
+
+
+      <li class="nav-item">
+        <a class="nav-link">
+          <div class="btn-group" mdbDropdown>
+            <div class='avatar-circle ml-auto hand animated fadeInRight' *ngIf="authService.isUserAuthenticated()"
+              mdbDropdownToggle mdbWavesEffect>
+              <span class='initials'
+                *ngIf="authService.current_user_initial; else checkStorage">{{authService.current_user_initial}}</span>
+              <ng-template #checkStorage>
+                <span class='initials'>{{current_user_initial}}</span>
+              </ng-template>
+            </div>
+            <div class="dropdown-menu dropdown-menu-right dropdown-primary">
+              <a class="dropdown-item" routerLink="dash" mdbWavesEffect>My Dashboard</a>
+              <a class="dropdown-item" (click)="goto_my_profile()" mdbWavesEffect>My Profile</a>
+              <div class="divider dropdown-divider"></div>
+              <a class="dropdown-item" routerLink="dash" (click)='signout()' mdbWavesEffect>Sign out</a>
+            </div>
+          </div>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link">
+          <div class="btn-group" mdbDropdown>
+            <div class='avatar-circle ml-auto hand animated fadeInRight' *ngIf="authService.isAdminAuthenticated()"
+              mdbDropdownToggle mdbWavesEffect>
+              <span class='initials'
+                *ngIf="authService.current_user_initial; else checkStorage">{{authService.current_user_initial}}</span>
+              <ng-template #checkStorage>
+                <span class='initials'>{{current_user_initial}}</span>
+              </ng-template>
+            </div>
+            <div class="dropdown-menu dropdown-menu-right dropdown-primary">
+              <a class="dropdown-item" routerLink="admindash" mdbWavesEffect>My Dashboard</a>
+              <div class="divider dropdown-divider"></div>
+              <a class="dropdown-item" routerLink="dash" (click)='signout()' mdbWavesEffect>Sign out</a>
+            </div>
+          </div>
+        </a>
+      </li>
+
+    </ul>
+
+
+
+  </links>
+</mdb-navbar>

@@ -1,0 +1,80 @@
+<div class="filter">
+
+  <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark teal darken-4" [containerInside]="true">
+
+    <links>
+
+
+      <!--FILTER TO SHOW IN HOME PAGE COMPONENT-->
+      <ul class="navbar-nav mr-auto animated pulse" *ngIf="url_path === '/home'">
+        <li class="nav-item active" (click)="on_filter_by('all')">
+          <a class="nav-link waves-light" mdbWavesEffect>
+            All Intern <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active" (click)="on_filter_by('20')">
+          <a class="nav-link waves-light" mdbWavesEffect>Top 20 Interns
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item active" (click)="on_filter_by('10')">
+          <a class="nav-link waves-light" mdbWavesEffect>Top 10 Interns
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item active" (click)="on_filter_by('5')">
+          <a class="nav-link waves-light" mdbWavesEffect>Top 5 Interns
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+      </ul>
+
+
+      <!--FILTER TO SHOW IN COMMUNITY PAGE COMPONENT-->
+      <ul class="navbar-nav mr-auto animated pulse" *ngIf="url_path === '/konnect'">
+        <li class="nav-item active" (click)="on_filter_by('newest')">
+          <a class="nav-link waves-light" mdbWavesEffect>
+            Newest
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item active" (click)="on_filter_by('oldest')">
+          <a class="nav-link waves-light" mdbWavesEffect>
+            Oldest
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item active" (click)="on_filter_by('unanswered')">
+          <a class="nav-link waves-light" mdbWavesEffect>
+            Unanswered
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+      </ul>
+
+
+      <!--FILTER TO SHOW IN BLOG PAGE COMPONENT-->
+      <ul class="navbar-nav mr-auto animated pulse" *ngIf="url_path === '/blog'">
+        <li class="nav-item active" (click)="on_filter_by('all')">
+          <a class="nav-link waves-light" mdbWavesEffect>
+            All blogs <span class="sr-only">(current)</span></a>
+        </li>
+        <!-- <li class="nav-item active" (click)="on_filter_by('popular')">
+          <a class="nav-link waves-light" mdbWavesEffect>Popular
+            <span class="sr-only">(current)</span>
+          </a>
+        </li> -->
+      </ul>
+
+
+      <!--SEARCH, NEEDED FOR BOTH PAGES, HOME/ BLOG/ COMMUNITY-->
+      <form class="md-form md-outline my-2 my-lg-0 ml-auto">
+        <div class="md-form md-outline">
+          <input mdbInput name="search" type="search" autocomplete="off" id="search" (click)="changeLabel()" #search class="form-control"
+            (keyup)="on_search(search.value)"   />
+          <label  [style.color]="labelColor" for="search"> {{searchLabel || 'Search'}}</label> 
+        </div>
+      </form>
+    </links>
+  </mdb-navbar>
+
+</div>

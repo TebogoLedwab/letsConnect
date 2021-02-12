@@ -1,0 +1,7 @@
+img {
+    width: 250px;
+    transition: var(--transition-speed);
+    &:hover {
+        width: 300px;
+    }
+}

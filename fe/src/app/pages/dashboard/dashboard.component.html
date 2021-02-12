@@ -1,0 +1,326 @@
+<Banner img="edit.svg" header1="" header2="Dashboard" header3="Get your profile up-to-date."
+  header4="This where you can tell us more about yourself."></Banner>
+
+
+
+<div class="container mt-5 main-wrap" style="border-radius: 2rem;">
+  <div class="flex-center border flex-column">
+
+    <div class="main" *ngIf="currentUser">
+
+      <div class="main-content">
+        <div class="row">
+
+          <div class="col-md-12 row top-section">
+
+            <app-userdetails (outUser)="saveUser($event)" [profile]="currentUser"></app-userdetails>
+
+          </div>
+
+          <div class="col-md-7 exp-container">
+            <app-workexperience [experience]="currentUser.experience"></app-workexperience>
+          </div>
+
+          <div class="col-md-5 docs-container">
+
+            <div class="row">
+
+              <div class="col-md-12 skills-container">
+
+                <div class="user-documents">
+
+                  <div class="row">
+
+                    <div class="col-10">
+                      <h3>
+                        <mdb-icon fas icon="code"></mdb-icon> Programming Skills
+                      </h3>
+                    </div>
+
+                    <div class="col-1 float-right">
+                      <h1 mdbBtn floating="true" size="lg" data-toggle="collapse" data-target="#addSkillForm"
+                        aria-expanded="true" aria-controls="collapseOne" mdbWavesEffect
+                        (click)="addSkill ? addSkill = false : addSkill = true;">
+                        <mdb-icon fas icon="plus-circle"></mdb-icon>
+                      </h1>
+                    </div>
+
+                  </div>
+
+                  <div id="addSkillForm" *ngIf="addSkill">
+
+                    <form class="text-center p-1 animated fadeIn">
+                      <div class="md-form input-group mb-3 form-inline">
+                        <input type="text" name="newSkill" [(ngModel)]="newSkill.skill" class="form-control"
+                          placeholder="Skill" aria-label="Recipient's username"
+                          aria-describedby="MaterialButton-addon2">
+
+                        <div class="input-group-append">
+                          <button mdbBtn class="btn btn-md m-0 px-3 radial-border" color="teal" outline="true"
+                            type="button" (click)="saveSkill()" id="MaterialButton-addon2">Add</button>
+                        </div>
+                      </div>
+
+                      <div class="md-form input-group">
+                        <mv-slider class="slider float-right" value="1" [ticks]="[1,2,3,4,5]"
+                          [ticksLabels]="[1,2,3,4,5]" data-slider-id="GC" id="G" [min]="1" [max]="5"
+                          (change)="change($event)"></mv-slider>
+                      </div>
+
+                    </form>
+
+                  </div>
+
+                  <!-- <div class="user-documents">
+                  <div>
+                    <h2>Documents</h2>
+                  </div>
+
+                  <div>
+                    <div class="row" *ngIf="currentUser.cv && currentUser.cv != ' '">
+                      <div class="col-9">
+                        <a (click)="viewPdf.show()">CV.pdf</a>
+                      </div>
+
+                      <div class="col-3">
+                        <mdb-icon fas icon="trash-alt" (click)="deleteDocument()"></mdb-icon>
+                      </div>
+                    </div>
+
+                    <div class="row radial-border"
+                      style="background-color: rgb(231, 230, 230);border-radius: 50px !important;"
+                      *ngIf="currentUser.cv && currentUser.cv == ' '">
+                      <div class="col-12">
+                        <h3>
+                          NO DOCUMENTS
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+
+                  <br />
+
+                  <button mdbBtn type="button" style="border-radius: 30px; width: 100%;" color="teal" outline="true"
+                    (click)="fileModal.showModal()">Upload</button>
+
+                </div> -->
+
+                  <div class="wrapper">
+                    <div class="skill wow fadeIn slower" *ngFor="let skill of currentUser.skills">
+                      <p class="m-1 mb-2">{{skill.skill}} <span class="skill-percentage"> -
+                          {{skill.scale/5*100}}%</span><i class="deleteSkill" (click)="deleteSkill(skill)"
+                          class="float-right far fa-trash-alt"></i></p>
+                      <div class="skill-bar-container animated slideInLeft">
+                        <span class="skill-bar" [style.width.%]="skill.scale/5*100"></span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div *ngIf="currentUser.skills.length == 0"
+                    style="background-color: rgb(208, 208, 224);border-radius: 30px;" class="text-center radial-border">
+                    <h2>No Skills</h2>
+                  </div>
+
+                </div>
+
+
+                <div class="col-md-12 interests-container wow fadeIn">
+
+                  <div class="user-skills">
+
+                    <div class="row">
+
+                      <div class="col-10">
+                        <h3>
+                          <mdb-icon fas icon="boxes"></mdb-icon> Interests
+                        </h3>
+                      </div>
+
+                      <div class="col-1 float-right waves-effect" >
+                        <h1  mdbBtn floating="true" size="lg"  data-toggle="collapse" data-target="#addInterestForm"
+                          aria-expanded="true" aria-controls="collapseOne" mdbWavesEffect
+                          (click)="addInterest ? addInterest = false : addInterest = true;">
+                          <mdb-icon fas icon="plus-circle" ></mdb-icon>
+                        </h1>
+                      </div>
+
+                    </div>
+
+                    <!-- Add Skills Form -->
+                    <div id="addInterestForm" *ngIf="addInterest">
+
+                      <form class="text-center p-5 animated fadeIn">
+                        <div class="md-form input-group mb-3 form-inline">
+                          <input type="text" name="newInterest" [(ngModel)]="newInterest" class="form-control"
+                            placeholder="Add Interest" aria-describedby="MaterialButton-addon2">
+                          <div class="input-group-append">
+                            <button mdbBtn class="btn btn-md m-0 px-3 radial-border" color="teal" outline="true"
+                              type="button" (click)="saveInterest()" id="MaterialButton-addon2">Add</button>
+                          </div>
+                        </div>
+                      </form>
+
+                    </div>
+
+                    <!-- Looping through interests -->
+                    <div class=" col-12 col-sm-12 col-md-6 col-lg-12 col-lg-12">
+                      <div *ngFor="let interest of currentUser.interests" class="chip wow fadeIn slower delay-1s">
+
+                        <strong>{{interest}}</strong>
+
+                        &nbsp;
+
+                        <i class="deleteSkill" (click)="deleteInterest(interest)" class="far fa-trash-alt"></i>
+
+                      </div>
+
+                      <div *ngIf="currentUser.interests.length == 0"
+                        style="background-color: rgb(208, 208, 224);border-radius: 30px;"
+                        class="text-center radial-border">
+                        <h2>No Interests</h2>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div id="circularMenu" class="circular-menu animated bounce" (click)="notificationsModal.show()">
+    <a class="floating-btn">
+      <i class="fa fa-bell"></i>
+    </a>
+  </div>
+
+
+
+  <!-- Apply Button -->
+  <!-- <div id="circularMenu" class="circular-menu animated bounce">
+  <a class="floating-btn" (click)="apply()">
+    <i class="fa fa-plus"></i>
+  </a>
+</div> -->
+
+  <!-- File Upload Component Modal -->
+  <app-fileupload #fileModal (outFile)="saveImage($event)" [accept]="'.pdf'"></app-fileupload>
+
+
+  <!-- PDF Preview Modal -->
+  <div mdbModal #viewPdf="mdbModal" class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <h4 class="modal-title w-100 font-weight-bold">Your Document</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="viewPdf.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body mx-3" *ngIf="currentUser">
+          <pdf-viewer *ngIf="currentUser.cv && currentUser.cv != ' '" class="pdfView" [src]="currentUser.cv"
+            [render-text]="true" [original-size]="true" [fit-to-page]="true" [show-borders]="true"
+            style="display: block;"></pdf-viewer>
+        </div>
+
+        <div class="modal-footer d-flex justify-content-center">
+          <button mdbBtn class="waves-light primary-btn" mdbWavesEffect (click)="viewPdf.hide()">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notifications Modal -->
+  <div mdbModal #notificationsModal="mdbModal" style="overflow-y: auto" class="modal fade right" tabindex="-1"
+    role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-full-height modal-right" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close pull-right" aria-label="Close" (click)="notificationsModal.hide()">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 *ngIf="currentUser" class="modal-title w-100" id="myModalLabel"><i class="fa fa-bell"></i> Notifications
+            ({{currentUser.notifications.length}})
+            <span class="clear-all float-center" (click)="clearNotifications()"><mdb-icon fas icon="trash"></mdb-icon></span>
+          </h4>
+        </div>
+        <div class="modal-body">
+
+          <div *ngIf="currentUser">
+            <div *ngFor="let notification of currentUser.notifications" class="notification">
+
+              <!-- Positive Points -->
+              <div class="note note-success alt" *ngIf="notification.notificationType == 'You got Points!!'">
+                <div>
+                  <small class="text-muted float-right">{{notification.date  | date: 'dd/MM/yyyy'}}</small>
+                </div>
+                {{notification.notification}}
+
+                <i (click)="deleteNotification(notification)" class="far fa-trash-alt float-right"></i>
+              </div>
+
+              <!-- Negative Points -->
+              <div class="note note-emergency" *ngIf="notification.notificationType == 'You got Negative Points!!'">
+                <div>
+                  <small class="text-muted float-right">{{notification.date  | date: 'dd/MM/yyyy'}}</small>
+                </div>
+                {{notification.notification}}
+
+                <i (click)="deleteNotification(notification)" class="far fa-trash-alt float-right"></i>
+              </div>
+
+              <!-- Liking -->
+              <div class="note note-info" *ngIf="notification.notificationType == 'People Liked Your Post'">
+                <div>
+                  <small class="text-muted float-right">{{notification.date  | date: 'dd/MM/yyyy'}}</small>
+                </div>
+                {{notification.notification}}
+
+                <i (click)="deleteNotification(notification)" class="far fa-trash-alt float-right"></i>
+              </div>
+
+              <!-- Disliking -->
+              <div class="note note-warning" *ngIf="notification.notificationType == 'People Disliked Your Post'">
+                <div>
+                  <small class="text-muted float-right">{{notification.date  | date: 'dd/MM/yyyy'}}</small>
+                </div>
+                {{notification.notification}}
+
+                <i (click)="deleteNotification(notification)" class="far fa-trash-alt float-right"></i>
+              </div>
+
+              <!-- Commenting -->
+              <div class="note note-default" *ngIf="notification.notificationType == 'People Commented On Your Post'">
+                <div>
+                  <small class="text-muted float-right">{{notification.date  | date: 'dd/MM/yyyy'}}</small>
+                </div>
+                {{notification.notification}}
+
+                <i (click)="deleteNotification(notification)" class="far fa-trash-alt float-right"></i>
+              </div>
+
+            </div>
+
+
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<Footer></Footer>

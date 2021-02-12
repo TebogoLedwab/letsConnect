@@ -1,0 +1,269 @@
+### test the root api url
+GET http://localhost:5000/
+
+
+
+#################### USER AUTHENTICATION
+### register new user
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+	"email": "larry@gmail.com",
+	"password": "123456l@",
+	"name": "Larry Codelan",
+	"avatar": " ",
+	"mobile_number": "0768495372",
+	"gender": "Male",
+	"age": "22"
+}
+
+
+### login
+POST http://localhost:5000/auth
+Content-Type: application/json
+
+{
+	"email": "kedibone@thedigitalacademy.co.za",
+	"password": "123456l@"
+}
+###--------------------end authentication
+
+#################### Admin AUTHENTICATION
+### register new Admin
+POST http://localhost:5000/admin
+Content-Type: application/json
+
+{
+	"email": "admin@gmail.com",
+	"password": "123456l@",
+	"name": "Malesedi Mokoena"
+}
+
+### login admin
+POST http://localhost:5000/auth/admin
+Content-Type: application/json
+
+{
+	"email": "admin@gmail.comm",
+	"password": "123456l@"
+}
+###--------------------end authentication
+
+
+#################### USER PROFILE
+### create and update profile
+POST http://localhost:5000/profiles
+Content-Type: application/json
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWU5ZDBmMjU0OWNmYTQyYTk4OTJiZTUwIn0sImlhdCI6MTU4NzM1MTU5NCwiZXhwIjoxNTg3NzExNTk0fQ.WvuiSNzqr_b8KUSiiHz8jFgZahOpxzKqtS4lgPlia64
+
+{
+	"status":"Intern",
+    "skills": ["CSS","Angular"],
+	"bio": "Graduate intern with 6 months experience",
+	"cv": "",
+	"date": "2019-10-11",
+	"experience": [{
+		"title": "Intern Dev",
+		"company": "DA",
+		"location": "Johannesburg",
+		"from": "2018-10-10",
+		"to": "2019-11-10",
+		"current": false,
+		"Description": "Web application development with 
+		tech lead and a team of 5"
+	}]
+}
+
+### get  users profile who logged in 
+GET http://localhost:5000/profiles/me
+Content-Type: application/json
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWU3ZGY1NzEzMGRiMTcwZWZhMDUyZTE4In0sImlhdCI6MTU4NTMxMzE4MSwiZXhwIjoxNTg1NjczMTgxfQ.ZN-oJNZoby8PQuF75L79Ift0z-0pg2vPoi272Tpmkqs
+
+### get all users profiles
+GET http://localhost:5000/profiles
+
+
+### add working experience
+PUT http://localhost:5000/profiles/experience
+Content-Type: application/json
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWU5NjA3ODY1ZTVlMmUwMzMyZTk3MmM5In0sImlhdCI6MTU4Njk0MzkwMCwiZXhwIjoxNTg3MzAzOTAwfQ.5q9iYqc9NeCw6u3haeLLN1ZBqEKkepcW3zdWdpv6Vjw
+
+{
+	"title": "Junior Dev",
+		"company": "DA",
+		"location": "Johannesburg",
+		"from": "2019-10-10",
+		"to": "2019-11-10",
+		"current": true
+}
+
+
+### delete work experience per ID
+DELETE http://localhost:5000/profiles/experience/5e9eef2bb0b2920320caca9d
+Content-Type: application/json
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWU0YjkxN2Y3NDhmNzExYTE5NjI5YTA5In0sImlhdCI6MTU4MjAxMjQyMywiZXhwIjoxNTgyMzcyNDIzfQ.IBmNRINRWUzHBxThX-OC_ak71G5h1RzPsHZ2KOoub5g
+
+
+
+
+#################### GET SINGLE USER SECTION
+### get user per generated token
+GET http://localhost:5000/auth
+Content-Type: application/json
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7fSwiaWF0IjoxNTgzOTk3MjEwLCJleHAiOjE1ODQzNTcyMTB9.Lij2jhGLAxIVsQh3KVWPVzCiybeMHyMoY4hp32jdBE8
+
+
+### get user per ID
+GET http://localhost:5000/profiles/user/5e5f50ef8dc7e205f80cf5c8
+
+###-------------------end single user section
+
+######----------------Community Post section-------------
+
+### get allcommunity posts
+GET http://localhost:5000/community 
+
+### create and update community post
+POST http://localhost:5000/community
+Content-Type: application/json
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWU5ZGJlOGEzN2I5ODYwNmVkYjA3ZmIxIn0sImlhdCI6MTU4NzQ3NjM1OSwiZXhwIjoxNTg3ODM2MzU5fQ.xrfNe8hhZZ9rTKfFutqUQRRTu0e9KcQRjSEXgFkpQoY
+
+{
+    "content": "post 1",
+	"title": "angular is very difficult but fun",
+	"tags": "json"
+}
+
+### add comments on a post 
+PUT http://localhost:5000/community/comments/5e9d2697e77dcd44949c52d1
+Content-Type: application/json
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWU5ZDBmMjU0OWNmYTQyYTk4OTJiZTUwIn0sImlhdCI6MTU4NzQ3NTU5NiwiZXhwIjoxNTg3ODM1NTk2fQ.M93p9qEL0RfBm9qVsR_LiTHOha5OL1obqU5gpRBnGpU
+
+{
+	"comment": "But the platform will never die"
+}
+
+
+GET http://localhost:5000/community/
+Content-Type: application/json
+
+
+### liking on a community post 
+PUT http://localhost:5000/community/likes/5e73a6c7ca0eef35d484a8a5
+Content-Type: application/json
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWU3MjBmMjhjNTc2MjMxNmIwOThhMGUwIn0sImlhdCI6MTU4NDYwMjg5NiwiZXhwIjoxNTg0OTYyODk2fQ.MRXWcrI9azNU1ci92tsb9m1b2DNB1lCFdqhtnboS1Ps
+
+### disliking on a community post 
+PUT http://localhost:5000/community/dislikes/5e73a6c7ca0eef35d484a8a5
+Content-Type: application/json
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWU3MjBmMjhjNTc2MjMxNmIwOThhMGUwIn0sImlhdCI6MTU4NDYwMjg5NiwiZXhwIjoxNTg0OTYyODk2fQ.MRXWcrI9azNU1ci92tsb9m1b2DNB1lCFdqhtnboS1Ps
+
+
+### delete community comment per ID
+DELETE http://localhost:5000/community/5e7db43eb5a5c7052c47bfcb/comments/5e7db43eb5a5c7052c47bfcb
+Content-Type: application/json
+x-auth-token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWU3ZGY1NzEzMGRiMTcwZWZhMDUyZTE4In0sImlhdCI6MTU4NTMxMzE4MSwiZXhwIjoxNTg1NjczMTgxfQ.ZN-oJNZoby8PQuF75L79Ift0z-0pg2vPoi272Tpmkqs
+
+
+### delete community post per ID
+DELETE http://localhost:5000/community/5e7df65230db170efa052e37
+Content-Type: application/json
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWU3YjVlZTBkMDFmMjQxOWNlNjAxNmMzIn0sImlhdCI6MTU4NTE0NTQ4NSwiZXhwIjoxNTg1NTA1NDg1fQ.c82f6GAxkn9ORbDTq7VHLqr0gA3zH65D70aNNJiicIo
+
+####---------community ends here -----------
+ 
+
+####----------Blog Start her ----------------
+### post a blog
+
+######----------------Blog Post section-------------
+
+### post a blog
+POST  http://localhost:5000/blogs
+Content-Type: application/json
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWU5MDcxYmY5ODU5NWQzM2Y4YmU1NDUzIn0sImlhdCI6MTU4Njk3MTEyNSwiZXhwIjoxNTg3MzMxMTI1fQ.y4FT2Po3KMZGa4S3R0Mnynz1voc8brS9mM5YMslkJ-M
+
+{
+"title":"node",
+"content": "new node update",
+"date":"2020-03-16"
+}
+
+### patch a blog
+PUT  http://localhost:5000/blogs/5e79e1be6798b43e30c3799f
+Content-Type: application/json
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWU3YjA1MWY3YjY3N2IwMmY0ZmVhYzM1In0sImlhdCI6MTU4NTEzMjA0OCwiZXhwIjoxNTg1NDkyMDQ4fQ.05fLi1m7-k6A5ngMxvnsIX8YPd22wBnSIiQnJ8VdVoc
+
+{
+	"title":"4IR is the future",
+	"id": "5e79e0d16798b43e30c3799e",
+	"content": "Robots will be amazing next thing",
+	"date":"2020-03-17"
+}
+
+### get all blogs 
+GET  http://localhost:5000/community
+Content-Type: application/json
+
+### Delete a blog
+DELETE  http://localhost:5000/blogs/
+Content-Type: application/json
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWU3YjVlZTBkMDFmMjQxOWNlNjAxNmMzIn0sImlhdCI6MTU4NTE0MzU0NCwiZXhwIjoxNTg1NTAzNTQ0fQ.XqjfPjdyB49h6KoKw5yK_xKShhNS9rCtAyvaj6yzjXs
+
+
+######----------------End Blog Post section-------------
+
+
+
+######----------------Apply section-------------
+
+### Apply 
+POST   http://localhost:5000/apply
+Content-Type: application/json
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWU4MWYyZmU4NzI2MmEzY2NjYzg1NjM3In0sImlhdCI6MTU4NTcyOTE5MiwiZXhwIjoxNTg2MDg5MTkyfQ.jhx-glpNNr25knrZCsU7n9kh3LSCsAlVJ4JPe7bBuFM
+
+
+### get all users applications
+GET http://localhost:5000/apply/applications
+
+
+
+######----------------Cohort section-------------
+
+### Add Cohort 
+POST   http://localhost:5000/cohorts
+Content-Type: application/json
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6IjVlODZlYmM2M2Q0NWNlMmU0ODgxNzA1YiJ9LCJpYXQiOjE1ODczMTU1ODIsImV4cCI6MTU4NzY3NTU4Mn0.iVh9RL5WO6kFJy3KJK64n12iXObEYEN3vKzR9iOC85I
+
+{
+	"name":"Spider Cohort",
+	"internNumber": 20,
+	"notes": "Best Cohort Ever",
+	"startDate": "2019-03-17",
+	"endDate":"2020-03-17"
+}
+
+### Update Cohort 
+PUT   http://localhost:5000/cohorts/5e8ee6b25bb0990ac0df6d6a
+Content-Type: application/json
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6IjVlODZlYmM2M2Q0NWNlMmU0ODgxNzA1YiJ9LCJpYXQiOjE1ODczMTU1ODIsImV4cCI6MTU4NzY3NTU4Mn0.iVh9RL5WO6kFJy3KJK64n12iXObEYEN3vKzR9iOC85I
+
+{
+	"name":"Spider sCohort",
+	"internNumber": 20,
+	"notes": "Best Cohort Ever",
+	"startDate": "2019-03-17",
+	"endDate":"2020-03-17"
+}
+
+### get all cohorts
+GET http://localhost:5000/cohorts
+Content-Type: application/json
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6IjVlODZlYmM2M2Q0NWNlMmU0ODgxNzA1YiJ9LCJpYXQiOjE1ODczMTU1ODIsImV4cCI6MTU4NzY3NTU4Mn0.iVh9RL5WO6kFJy3KJK64n12iXObEYEN3vKzR9iOC85I
+
+
+### delete a cohort
+DELETE http://localhost:5000/cohorts/5e8ee6b25bb0990ac0df6d6a
+Content-Type: application/json
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6IjVlODZlYmM2M2Q0NWNlMmU0ODgxNzA1YiJ9LCJpYXQiOjE1ODczMTU1ODIsImV4cCI6MTU4NzY3NTU4Mn0.iVh9RL5WO6kFJy3KJK64n12iXObEYEN3vKzR9iOC85I

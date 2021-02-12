@@ -1,0 +1,141 @@
+.chart-container {
+    padding: 30px;
+    color: #303030;
+
+    @media screen and (max-width: 720px){
+        padding: 0;
+        text-align: center;
+    }
+
+}
+
+.article {
+    display: inline-block;
+    vertical-align: top;
+    width: auto;
+    margin: 1.1rem 1rem 0 0;
+    padding: 1.4rem 1.6rem;
+    background: linear-gradient(#f4f7f8, #eafaff);
+    color: rgba(0, 0, 0, 0.1) ;
+    border-radius: 0.25rem;
+    box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
+    font-size: 0;
+}
+.article--4 {
+    width: calc((100% / 4) - 1.1rem);
+}
+
+@media (max-width: 768px) {
+    .article--4 {
+       width: 100%;
+    }
+}
+
+.title{
+    font-size: 50px !important;
+}
+
+.article__text {
+    font-size: 0.9rem;
+    color: inherit;
+}
+.article__list {
+    margin-bottom: 1.2rem;
+}
+.article__list ul {
+    list-style-type: none;
+    font-size: 0;
+}
+.article__list li {
+    display: inline-block;
+    vertical-align: top;
+}
+.article__list a {
+    display: inline-block;
+    margin-right: 0.4rem;
+    padding: 0.5rem 0.6rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    font-size: 0.8rem;
+    color: rgba(0, 0, 0, 0.1) ;
+}
+.article__list a svg {
+    height: 0.8rem;
+    margin: 0 0.4rem;
+    position: relative;
+    top: 0.1rem;
+}
+.article__table {
+    width: 100%;
+    text-align: left;
+}
+.article__table th {
+    padding: 1rem 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    font-size: 1rem;
+}
+@media (max-width: 768px) {
+    .article__table th:nth-child(2),
+    .article__table th:nth-child(3) {
+        display: none;
+    }
+}
+.article__table td {
+    padding: 1rem 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    font-size: 1rem;
+}
+@media (max-width: 768px) {
+    .article__table td:nth-child(2),
+    .article__table td:nth-child(3) {
+        display: none;
+    }
+}
+.article__table tr:last-child td {
+    padding-bottom: 0;
+}
+.article__table svg {
+    width: 1.2rem;
+    margin-right: 0.6rem;
+}
+.widget {
+    position: relative;
+    padding-left: 3rem;
+    text-align: right;
+}
+.widget::before {
+    content: "";
+    width: 3.3rem;
+    height: 3.3rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background: linear-gradient(to bottom, #ffffff 0%, #f59300 100%);
+    border-radius: 50%;
+}
+.widget svg {
+    width: 1.5rem;
+    position: absolute;
+    top: 0.9rem;
+    left: 0.9rem;
+    z-index: 2;
+    color: #fff;
+}
+.widget strong {
+    line-height: 1.2;
+}
+.widget strong span {
+    display: block;
+}
+.widget strong span:nth-child(1) {
+    font-size: 1.6rem;
+    color: rgb(53, 52, 52) ;
+}
+.widget strong span:nth-child(2) {
+    font-size: 0.9rem;
+    font-weight: normal;
+    color: rgb(88, 88, 88) ;
+}
+

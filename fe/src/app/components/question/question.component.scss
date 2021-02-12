@@ -1,0 +1,158 @@
+.user-profile-picture {
+  height: 64px;
+  width: 64px;
+  border-radius: 50%;
+}
+
+.date{
+  margin: 10px;
+}
+
+.user_details {
+  margin-bottom: 33px;
+}
+
+.name {
+  font-size: 20px;
+  margin: 15px;
+}
+
+.value {
+  margin-right: 5px;
+}
+
+.question-card{
+  transition: all 0.5s;
+}
+
+.tags{
+	padding: 5px;
+}
+
+.tag{
+	margin: 2px;
+}
+
+/* Vars
+========================================================================== */
+
+$avatar-border-color: var(--konnect-green);
+$avatar-border-width: 2px;
+
+$color: #999;
+$bg: var(--white);
+$bg2: var(--bg-secondary);
+$title-color: var(--konnect-green);
+
+/* Component
+========================================================================== */
+
+.c-logs {
+  position: relative;
+  margin: 15px;
+  color: $color;
+}
+
+.c-logs:before {
+  position: absolute;
+  left: ((72px / 2) + (4px / 2));
+  top: 10px;
+  bottom: 0;
+  
+  content: "";
+  display: block;
+  width: 4px;
+  
+  background-color: $avatar-border-color;
+}
+
+.c-logs__item {
+  position: relative;
+  padding-left: 110px;
+}
+
+.c-logs__item:not(:first-child) {
+  margin-top: 70px;
+}
+
+.c-logs__avatar {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  display: block;
+  width: 72px;
+  height: 72px;
+
+  margin: $avatar-border-width;
+
+  border-radius: 50%;
+
+  box-shadow: 0 0 0 $avatar-border-width $avatar-border-color;
+}
+
+.c-logs__body {
+  position: relative;
+
+  padding: 20px;
+  border-radius: 3px;
+  background-color: $bg;
+
+  box-shadow: 0 2px 5px rgba(#000, .4);
+  transition: all 0.5s;
+
+  &:hover{
+    background-color: $bg2;
+    color: grey  !important;
+    transition: all 0.5s;
+    .c-logs__content{
+      color: grey !important;
+    }
+
+    p{
+      color: grey;
+    }
+
+  }
+
+}
+
+.c-logs__body:before {
+  position: absolute;
+  right: 100%;
+  top: 33px;
+
+  content: "";
+  display: block;
+
+  border: 10px solid transparent;
+  border-right-color: $bg;
+}
+
+.c-logs__content:hover{
+  color: white !important;
+}
+
+.c-logs__content p:first-child {
+  margin-top: 0;
+}
+
+.c-logs__content p:last-child {
+  margin-bottom: 0;
+}
+
+.c-logs__title {
+  display: inline-block;
+
+  margin-top: 0;
+  margin-bottom: 15px;
+
+  font-size: 120%;
+  font-weight: bold;
+
+  color: $title-color;
+}
+
+.fa{
+  cursor: pointer;
+}

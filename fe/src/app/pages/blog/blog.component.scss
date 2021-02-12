@@ -1,0 +1,54 @@
+.button {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    width: 60px;
+}
+textarea {
+    position: relative;
+    border: none;
+    width: 232px;
+    height: 95px;
+    resize: none;
+    outline: none; /* add this to stop highlight on focus */
+}
+.float{
+  position:fixed;
+  width:50px;
+  height:50px;
+  bottom:40px;
+  right:40px;
+  background-color:#25d366;
+  color:#FFF;
+  border-radius:50px;
+  text-align:center;
+  font-size:30px;
+  font-family: Gotham Narrow,-apple-system,Segoe UI,system-ui,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+  box-shadow: 2px 2px 3px #999;
+  z-index:100;
+}
+
+.my-float{
+  margin-top:16px;
+}
+.image-upload > input
+{
+    display: none;
+}
+
+// .image-upload img
+// {
+//     width: 80px;
+//     cursor: pointer;
+// }
+
+.image-upload > input
+{
+    display: none;
+}
+
+.image-upload img
+{
+    width: 80px;
+    cursor: pointer;
+}
